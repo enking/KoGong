@@ -1,1 +1,1 @@
-# KoGong
+# coding && git self study 
