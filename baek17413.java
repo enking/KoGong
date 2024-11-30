@@ -14,12 +14,42 @@
 출력
 첫째 줄에 문자열 S의 단어를 뒤집어서 출력한다.*/
 
-import java.util.*;
+
 import java.io.*;
 
 public class baek17413 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String str = br.readLine();
 
+        StringBuilder result = new StringBuilder(); // 단어 뒤집기 결과
+        StringBuilder word = new StringBuilder(); // 단어 뒤집기
+        boolean inTag = false; // 태그 안팎을 구분
+
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+
+            if (c == '<') { //를 기준으로 사이에 있는지 확인
+                result.append(word.reverse());
+                word.setLength(0);
+                inTag = true;
+                result.append(c);
+            } else if (c == '>') {
+                inTag = false;
+                result.append(c);
+            } else if (inTag) {
+                result.append(c);
+            } else if (c == ' ') {
+                result.append(word.reverse());
+                word.setLength(0);
+                result.append(c);
+            } else {
+                word.append(c);
+            }
+        }
+
+        result.append(word.reverse());
+
+        System.out.println(result);
     }
 }
